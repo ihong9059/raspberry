@@ -9,15 +9,18 @@ void main() {
   int dev;
   dev = serialOpen(SER_PORT, BAUD_RATE);
   if(dev == -1){
-    fprintf(stderr, "Port Open Err.\n");
+    // fprintf(stderr, "Port Open Err.\n");
+    printf("Port Open Err.\n");
     exit(-1);
   }
-  fprintf(stdout,"Port Opend\n");
+  // fprintf(stdout,"Port Opend\n");
+  printf("Port Opened\n");
   serialFlush(dev);
   while(1){
     int c;
     c = serialGetchar(dev);
     if(c != -1 && c != 'x'){
+      // putchar(c);
       fputc(c, stderr);
       serialPutchar(dev,(unsigned char)c);
     }
@@ -25,7 +28,8 @@ void main() {
       break;
     }
   }
-  fprintf(stdout, "Port Closed. \n");
+  printf("Port Closed.\n");
+  // fprintf(stdout, "Port Closed. \n");
   serialClose(dev);
   // return 0;
 }
